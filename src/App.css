@@ -15,4 +15,9 @@ body {
 
 h2 {
   margin-block-end: 16px;
+  font-family: "Cairo-Bold";
+}
+
+table * {
+  font-family: "Cairo-Light" !important;
 }
