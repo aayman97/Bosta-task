@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainLayout from "../Layout";
 import "./style/trackingPage.css";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import CustomizedSteppers from "./components/CustomizedSteppers";
+import { ShipmentTrackingContext } from "../App";
 
 const TrackingPage = () => {
+  const context = useContext(ShipmentTrackingContext);
+
   return (
     <MainLayout>
       <div className="shippment-details-container">
