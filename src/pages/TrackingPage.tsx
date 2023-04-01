@@ -6,7 +6,13 @@ import CustomizedSteppers from "./components/CustomizedSteppers";
 import { ShipmentTrackingContext } from "../App";
 import { TransitEventState } from "@/types";
 
-const STEPS = [
+const STEPS: {
+  name:
+    | TransitEventState.TICKET_CREATED
+    | TransitEventState.PACKAGE_RECEIVED
+    | TransitEventState.OUT_FOR_DELIVERY
+    | TransitEventState.DELIVERED;
+}[] = [
   {
     name: TransitEventState.TICKET_CREATED,
   },
@@ -27,10 +33,10 @@ const TrackingPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    if (context) {
+    if (context?.shipmentDetails) {
       let step = 0;
-      for (let i = 0; i < context.TransitEvents.length; i++) {
-        const currEvent = context.TransitEvents[i];
+      for (let i = 0; i < context.shipmentDetails.TransitEvents.length; i++) {
+        const currEvent = context.shipmentDetails.TransitEvents[i];
         const currState = currEvent.state;
 
         switch (currState) {
@@ -75,7 +81,7 @@ const TrackingPage = () => {
           <CustomizedSteppers
             steps={STEPS}
             activeStep={currentStep}
-            currentStatus={context?.CurrentStatus}
+            currentStatus={context?.shipmentDetails?.CurrentStatus}
           />
         </div>
       </div>
