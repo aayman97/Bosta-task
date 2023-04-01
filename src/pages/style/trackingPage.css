@@ -1,44 +1,38 @@
-.shippment-details-container{
-    
-    width : 100%;
-    height: 400px;
-    border: 2px solid rgba(137, 133, 133, 0.19);
-    border-radius: 20px;
+.shippment-details-container {
+  width: 100%;
+  height: 400px;
+  border: 2px solid rgba(137, 133, 133, 0.19);
+  border-radius: 20px;
 }
 
-.tracking-trip-container{
-
-    height: 50%;
-    border-top: 2px solid rgba(137, 133, 133, 0.19);
-    display: flex;
-    align-items: center;
-    padding: 0px 40px ;
-    justify-content: center;
+.tracking-trip-container {
+  height: 50%;
+  border-top: 2px solid rgba(137, 133, 133, 0.19);
+  display: flex;
+  align-items: center;
+  padding: 0px 40px;
+  justify-content: center;
 }
 
-.tracking-meter{
-    width: 100%;
-    height: 8px;
-    background-color: #eeeeee;
-    border-radius: 10px;
-    position: relative;
-
+.tracking-meter {
+  width: 100%;
+  height: 8px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  position: relative;
 }
 
-.tracking-meter-fill{
-   
-    height: 100%;
-    background-color: forestgreen;
-    border-radius: 10px;
+.tracking-meter-fill {
+  height: 100%;
+  background-color: forestgreen;
+  border-radius: 10px;
 }
 
-.tracking-image-indicator{
-    width : 50px;
-    height: 50px;
-    border-radius: 30px;
-    background-color: white;
-    border: 1px solid #eeeeee ;
-    position: absolute;
-    top : -25px;
-    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
+.tracking-image-indicator {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: white;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
 }
