@@ -3,17 +3,18 @@ export interface TransitEvent {
   timestamp: string;
   hub?: string;
   reason?: string;
+  exceptionCode?: string;
 }
 
 export enum TransitEventState {
-  TICKET_CREATED = "Ticket Created",
-  PACKAGE_RECEIVED = "Package Received",
-  IN_TRANSIT = "In Transit",
-  NOT_YET_SHIPPED = "Not Yet Shipped",
-  OUT_FOR_DELIVERY = "Out For Delivery",
-  WAITING_FOR_CUSTOMER_ACTION = "Waiting For Customer Action",
-  DELIVERED = "Delivered",
-  CANCELLED = "Cancelled",
+  TICKET_CREATED = "TICKET_CREATED",
+  PACKAGE_RECEIVED = "PACKAGE_RECEIVED",
+  IN_TRANSIT = "IN_TRANSIT",
+  NOT_YET_SHIPPED = "NOT_YET_SHIPPED",
+  OUT_FOR_DELIVERY = "OUT_FOR_DELIVERY",
+  WAITING_FOR_CUSTOMER_ACTION = "WAITING_FOR_CUSTOMER_ACTION",
+  DELIVERED = "DELIVERED",
+  CANCELLED = "CANCELLED",
 }
 
 export interface ShipmentTracking {
