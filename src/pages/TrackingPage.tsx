@@ -6,10 +6,10 @@ import CustomizedSteppers from "./components/CustomizedSteppers";
 import { ShipmentTrackingContext } from "../App";
 
 const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-  "Create an ay 7aga",
+  "Order has been created",
+  "Received by the buyer",
+  "Out for delivery",
+  "Delivered",
 ];
 
 const TrackingPage = () => {
@@ -35,7 +35,7 @@ const TrackingPage = () => {
                   }
                
             </div> */}
-          <CustomizedSteppers steps={steps} activeStep={1} />
+          <CustomizedSteppers steps={steps} activeStep={2} />
         </div>
       </div>
     </MainLayout>

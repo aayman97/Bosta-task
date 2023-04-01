@@ -16,20 +16,18 @@ import { StepIconProps } from "@mui/material/StepIcon";
 import images from "../../assets/images.js";
 import "../../assets/images/checkmark-outline.svg";
 
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+const ColorlibConnector = styled(StepConnector)(({ theme, color }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 22,
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      background:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      background: color,
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      background: color,
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -42,7 +40,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 }));
 
 const ColorlibStepIconRoot = styled("div")<{
-  ownerState: { completed?: boolean; active?: boolean };
+  ownerState: { completed?: boolean; active?: boolean; color?: string };
 }>(({ theme, ownerState }) => ({
   backgroundColor: "white",
   zIndex: 1,
@@ -56,33 +54,37 @@ const ColorlibStepIconRoot = styled("div")<{
   transform: "scale(1.2)",
   border: "1px solid #ccc",
   ...(ownerState.active && {
-    background:
-      "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    background: ownerState.color,
     boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
   }),
   ...(ownerState.completed && {
     backgroundImage: "url(../../assets/images/checkmark-outline.svg)",
-    backgroundColor: "blue",
-    transform: "scale(0.5)",
+    backgroundColor: ownerState.color,
+    transform: "scale(0.7)",
   }),
 }));
 
 function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
+  const { active, completed, className, color } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />,
-    2: <GroupAddIcon color={"success"} />,
-    3: <VideoLabelIcon color={"success"} />,
-    4: <VideoLabelIcon color={"success"} />,
+    2: <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />,
+    3: <img src={images.carIcon} style={{ width: "50%" }} alt="check_mark" />,
+    4: <img src={images.cartIcon} style={{ width: "50%" }} alt="check_mark" />,
   };
-  console.log("completed :", completed);
+
+  console.log("color : ", color);
   return (
     <ColorlibStepIconRoot
-      ownerState={{ completed, active }}
+      ownerState={{ completed, active, color }}
       className={className}
     >
-      {icons[String(props.icon)]}
+      {completed ? (
+        <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />
+      ) : (
+        icons[String(props.icon)]
+      )}
     </ColorlibStepIconRoot>
   );
 }
@@ -95,32 +97,22 @@ export default function CustomizedSteppers({
   steps,
   activeStep,
 }: StepperProps) {
-  React.useEffect(() => {
-    for (
-      let i = 0;
-      i < document.getElementsByClassName("MuiStepLabel-iconContainer").length;
-      i++
-    ) {
-      document.getElementsByClassName("MuiStepLabel-iconContainer")[
-        i
-      ].style.position = "relative";
-
-      document.getElementsByClassName("MuiStepLabel-iconContainer")[
-        i
-      ].style.left = "2.5%";
-    }
-  }, []);
-
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
         alternativeLabel
         activeStep={activeStep}
-        connector={<ColorlibConnector />}
+        connector={<ColorlibConnector color="green" />}
       >
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel
+              StepIconComponent={(props) => (
+                <ColorlibStepIcon {...props} color={"green"} />
+              )}
+            >
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
