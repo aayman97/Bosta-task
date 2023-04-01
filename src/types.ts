@@ -15,3 +15,22 @@ export enum TransitEventState {
   DELIVERED = "Delivered",
   CANCELLED = "Cancelled",
 }
+
+export interface ShipmentTracking {
+  provider: "Bosta";
+  CurrentStatus: {
+    state: TransitEventState;
+    timestamp: string;
+  };
+  PromisedDate: string;
+  TrackingNumber: string;
+  TrackingURL: string;
+  SupportPhoneNumbers: string[];
+  TransitEvents: TransitEvent[];
+  CreateDate: string;
+  isEditableShipment: boolean;
+  nextWorkingDay: {
+    dayDate: string;
+    dayName: "Saturday" | "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thrusday" | "Friday";
+  }[];
+}
