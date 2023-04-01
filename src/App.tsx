@@ -23,7 +23,7 @@ function App() {
   const [shipmentDetails, setShipmentDetails] =
     useState<ShipmentTracking | null>(null);
   // const [shipmentId, setShipmentId] = useState<number | null>(null);
-  const [shipmentId, setShipmentId] = useState<number | null>(SHIPMENT_ID);
+  const [shipmentId, setShipmentId] = useState<number | null>(null);
   async function fetchShipmentTrackingInfo() {
     try {
       const res = await axios.get<ShipmentTracking>(
@@ -38,7 +38,9 @@ function App() {
   }
 
   useEffect(() => {
-    fetchShipmentTrackingInfo();
+    if (shipmentId) {
+      fetchShipmentTrackingInfo();
+    }
   }, [shipmentId]);
 
   return (

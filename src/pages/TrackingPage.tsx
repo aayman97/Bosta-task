@@ -61,23 +61,42 @@ const TrackingPage = () => {
   return (
     <MainLayout>
       <div className="shippment-details-container">
-        <div style={{ height: "50%" }} />
+        <div className="shipment-data">
+          <div className="each-shipment-data">
+            <h5>Shipment number 2212121</h5>
+            <h4
+              style={{
+                color:
+                  context?.shipmentDetails?.CurrentStatus.state ===
+                  TransitEventState.DELIVERED
+                    ? "green"
+                    : context?.shipmentDetails?.CurrentStatus.state ===
+                      TransitEventState.NOT_YET_SHIPPED
+                    ? "#ffb12b"
+                    : "#f4050d",
+              }}
+            >
+              Delivered
+            </h4>
+          </div>
+
+          <div className="each-shipment-data">
+            <h5>Last updated</h5>
+            <h4>21-10-2023</h4>
+          </div>
+
+          <div className="each-shipment-data">
+            <h5>Seller Name</h5>
+            <h4>SOUQ.COM</h4>
+          </div>
+
+          <div className="each-shipment-data">
+            <h5>Promised Date</h5>
+            <h4>21-10-2023</h4>
+          </div>
+        </div>
 
         <div className="tracking-trip-container">
-          {/* <div className='tracking-meter'>
-                <div className='tracking-meter-fill' style={{ width : "33%"}}>
-              
-                </div>
-                {[...Array(4).keys()].map((item,index) =>{
-                  return(
-                    <div className='tracking-image-indicator' style={{left :`${index*(32.5)-0.2}%`}}>
-                  
-                    </div>
-                  )
-                }) 
-                  }
-               
-            </div> */}
           <CustomizedSteppers
             steps={STEPS}
             activeStep={currentStep}
