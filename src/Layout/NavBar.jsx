@@ -33,9 +33,7 @@ const NavBar = () => {
       <div className="routesContainer">
         <div className="track-shippment-container">
           <a
-            className={`routeButton track-shippment ${
-              openShippment && "opened"
-            }`}
+            className={`routeButton track-shippment ${openShippment && "opened"}`}
             onClick={() => {
               setOpenShippment(!openShippment);
             }}
@@ -47,14 +45,8 @@ const NavBar = () => {
               <div className="input-container">
                 <h4>Track your shippment</h4>
                 <div className="input-search">
-                  <input
-                    onChange={(e) => (id.current = +e.target.value)}
-                    placeholder="shippment number"
-                  />
-                  <img
-                    onClick={() => context.setShipmentId(id.current)}
-                    src={images.searchIcon}
-                  />
+                  <input onChange={(e) => (id.current = +e.target.value)} placeholder="shippment number" />
+                  <img onClick={() => context.setShipmentId(id.current)} src={images.searchIcon} />
                 </div>
               </div>
             </div>

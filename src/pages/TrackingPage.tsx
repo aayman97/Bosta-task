@@ -5,6 +5,9 @@ import "./style/trackingPage.css";
 import CustomizedSteppers from "./components/CustomizedSteppers";
 import { ShipmentTrackingContext } from "../App";
 import { TransitEventState } from "@/types";
+import EventsTable from "./components/EventsTable";
+import AddressCard from "./components/AddressCard";
+import ReportProblem from "./components/ReportProblem";
 
 const STEPS: {
   name:
@@ -33,6 +36,7 @@ const TrackingPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
+    console.log(context);
     if (context?.shipmentDetails) {
       let step = 0;
       for (let i = 0; i < context.shipmentDetails.TransitEvents.length; i++) {
@@ -97,11 +101,32 @@ const TrackingPage = () => {
         </div>
 
         <div className="tracking-trip-container">
+          {/* <div className='tracking-meter'>
+                <div className='tracking-meter-fill' style={{ width : "33%"}}>
+              
+                </div>
+                {[...Array(4).keys()].map((item,index) =>{
+                  return(
+                    <div className='tracking-image-indicator' style={{left :`${index*(32.5)-0.2}%`}}>
+                  
+                    </div>
+                  )
+                }) 
+                  }
+               
+            </div> */}
           <CustomizedSteppers
             steps={STEPS}
             activeStep={currentStep}
             currentStatus={context?.shipmentDetails?.CurrentStatus}
           />
+        </div>
+      </div>
+      <div className="table-and-address-container">
+        <EventsTable transitEvents={context?.shipmentDetails?.TransitEvents} />
+        <div className="address-and-report-container">
+          <AddressCard />
+          <ReportProblem />
         </div>
       </div>
     </MainLayout>

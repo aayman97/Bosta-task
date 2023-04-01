@@ -60,3 +60,50 @@
 .each-shipment-data h4 {
   font-family: "Cairo-Bold";
 }
+
+.table-and-address-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.table-container {
+  flex-grow: 1;
+}
+
+.address-card {
+  background-color: #eaeaea;
+  padding: 20px 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.address-and-report-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.report-container {
+  outline: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.report-container strong {
+  display: block;
+  margin-block-end: 16px;
+}
+
+.report-button {
+  background-color: red;
+  width: 100%;
+  border-radius: 15px;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
