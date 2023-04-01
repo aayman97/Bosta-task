@@ -5,13 +5,10 @@ import "./style/trackingPage.css";
 import CustomizedSteppers from "./components/CustomizedSteppers";
 import { ShipmentTrackingContext } from "../App";
 import { TransitEventState } from "@/types";
+import EventsTable from "./components/EventsTable";
 
 const STEPS: {
-  name:
-    | TransitEventState.TICKET_CREATED
-    | TransitEventState.PACKAGE_RECEIVED
-    | TransitEventState.OUT_FOR_DELIVERY
-    | TransitEventState.DELIVERED;
+  name: TransitEventState.TICKET_CREATED | TransitEventState.PACKAGE_RECEIVED | TransitEventState.OUT_FOR_DELIVERY | TransitEventState.DELIVERED;
 }[] = [
   {
     name: TransitEventState.TICKET_CREATED,
@@ -78,12 +75,11 @@ const TrackingPage = () => {
                   }
                
             </div> */}
-          <CustomizedSteppers
-            steps={STEPS}
-            activeStep={currentStep}
-            currentStatus={context?.shipmentDetails?.CurrentStatus}
-          />
+          <CustomizedSteppers steps={STEPS} activeStep={currentStep} currentStatus={context?.shipmentDetails?.CurrentStatus} />
         </div>
+      </div>
+      <div>
+        <EventsTable transitEvents={context?.shipmentDetails?.TransitEvents} />
       </div>
     </MainLayout>
   );

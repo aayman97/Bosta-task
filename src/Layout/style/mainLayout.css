@@ -1,12 +1,13 @@
-.mainLayoutContainer{
-    width : 100vw
+.mainLayoutContainer {
+  width: 100vw;
 }
 
-.page-container{
-    width : 100%;
-    padding:20px 40px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-
+.page-container {
+  width: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
 }
