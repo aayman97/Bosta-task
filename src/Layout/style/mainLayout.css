@@ -1,0 +1,12 @@
+.mainLayoutContainer{
+    width : 100vw
+}
+
+.page-container{
+    width : 100%;
+    padding:20px 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+}
