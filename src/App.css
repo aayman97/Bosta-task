@@ -12,3 +12,7 @@ body {
 #root {
   min-height: 100%;
 }
+
+h2 {
+  margin-block-end: 16px;
+}
