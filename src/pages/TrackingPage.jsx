@@ -4,6 +4,13 @@ import "./style/trackingPage.css";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import CustomizedSteppers from "./components/CustomizedSteppers";
 
+const steps = [
+  "Select campaign settings",
+  "Create an ad group",
+  "Create an ad",
+  "Create an ay 7aga",
+];
+
 const TrackingPage = () => {
   return (
     <MainLayout>
@@ -25,7 +32,7 @@ const TrackingPage = () => {
                   }
                
             </div> */}
-          <CustomizedSteppers />
+          <CustomizedSteppers steps={steps} activeStep={1} />
         </div>
       </div>
     </MainLayout>

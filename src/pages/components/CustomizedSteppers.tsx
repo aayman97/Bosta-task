@@ -22,7 +22,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
+      background:
         "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
     },
   },
@@ -44,8 +44,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 const ColorlibStepIconRoot = styled("div")<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark" ? theme.palette.grey[700] : "#ccc",
+  backgroundColor: "white",
   zIndex: 1,
   color: "#fff",
   width: 50,
@@ -55,6 +54,7 @@ const ColorlibStepIconRoot = styled("div")<{
   justifyContent: "center",
   alignItems: "center",
   transform: "scale(1.2)",
+  border: "1px solid #ccc",
   ...(ownerState.active && {
     background:
       "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
@@ -63,7 +63,7 @@ const ColorlibStepIconRoot = styled("div")<{
   ...(ownerState.completed && {
     backgroundImage: "url(../../assets/images/checkmark-outline.svg)",
     backgroundColor: "blue",
-    transform: "scale(0.8)",
+    transform: "scale(0.5)",
   }),
 }));
 
@@ -72,11 +72,11 @@ function ColorlibStepIcon(props: StepIconProps) {
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-    4: <VideoLabelIcon />,
+    2: <GroupAddIcon color={"success"} />,
+    3: <VideoLabelIcon color={"success"} />,
+    4: <VideoLabelIcon color={"success"} />,
   };
-
+  console.log("completed :", completed);
   return (
     <ColorlibStepIconRoot
       ownerState={{ completed, active }}
@@ -86,20 +86,36 @@ function ColorlibStepIcon(props: StepIconProps) {
     </ColorlibStepIconRoot>
   );
 }
+interface StepperProps {
+  steps: string[];
+  activeStep: number;
+}
 
-const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-  "Create an ay 7aga",
-];
+export default function CustomizedSteppers({
+  steps,
+  activeStep,
+}: StepperProps) {
+  React.useEffect(() => {
+    for (
+      let i = 0;
+      i < document.getElementsByClassName("MuiStepLabel-iconContainer").length;
+      i++
+    ) {
+      document.getElementsByClassName("MuiStepLabel-iconContainer")[
+        i
+      ].style.position = "relative";
 
-export default function CustomizedSteppers() {
+      document.getElementsByClassName("MuiStepLabel-iconContainer")[
+        i
+      ].style.left = "2.5%";
+    }
+  }, []);
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
         alternativeLabel
-        activeStep={1}
+        activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
         {steps.map((label) => (
