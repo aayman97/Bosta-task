@@ -4,17 +4,29 @@ import MainLayout from "../Layout";
 import "./style/trackingPage.css";
 import CustomizedSteppers from "./components/CustomizedSteppers";
 import { ShipmentTrackingContext } from "../App";
-import { EventState, TransitEventState } from "@/types";
+import { EventState, EventStateArabic, TransitEventState } from "@/types";
 import EventsTable from "./components/EventsTable";
 import AddressCard from "./components/AddressCard";
 import ReportProblem from "./components/ReportProblem";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const weekday = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const STEPS: {
-  name: TransitEventState.TICKET_CREATED | TransitEventState.PACKAGE_RECEIVED | TransitEventState.OUT_FOR_DELIVERY | TransitEventState.DELIVERED;
+  name:
+    | TransitEventState.TICKET_CREATED
+    | TransitEventState.PACKAGE_RECEIVED
+    | TransitEventState.OUT_FOR_DELIVERY
+    | TransitEventState.DELIVERED;
 }[] = [
   {
     name: TransitEventState.TICKET_CREATED,
@@ -35,7 +47,9 @@ const TrackingPage = () => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const locale = i18n.language === "ar" ? "ar-EG" : "en-US";
 
   useEffect(() => {
     if (context?.shipmentDetails) {
@@ -70,49 +84,78 @@ const TrackingPage = () => {
           <div className="shippment-details-container">
             <div className="shipment-data">
               <div className="each-shipment-data">
-                <h5>Shipment number {context?.shipmentDetails?.TrackingNumber}</h5>
+                <h5>
+                  {t("shipment-number")}{" "}
+                  {context?.shipmentDetails?.TrackingNumber}
+                </h5>
                 <h4
                   style={{
                     color:
-                      context?.shipmentDetails?.CurrentStatus.state === TransitEventState.DELIVERED
+                      context?.shipmentDetails?.CurrentStatus.state ===
+                      TransitEventState.DELIVERED
                         ? "green"
-                        : context?.shipmentDetails?.CurrentStatus.state === TransitEventState.NOT_YET_SHIPPED
+                        : context?.shipmentDetails?.CurrentStatus.state ===
+                          TransitEventState.NOT_YET_SHIPPED
                         ? "#ffb12b"
                         : "#f4050d",
                   }}
                 >
-                  {EventState[context?.shipmentDetails?.CurrentStatus.state]}
+                  {i18n.language === "en"
+                    ? EventState[context?.shipmentDetails?.CurrentStatus.state]
+                    : EventStateArabic[
+                        context?.shipmentDetails?.CurrentStatus.state
+                      ]}
                 </h4>
               </div>
 
               <div className="each-shipment-data">
-                <h5>Last updated</h5>
+                <h5>{t("last-updated")}</h5>
                 <h4>
-                  {new Date(context?.shipmentDetails?.CurrentStatus.timestamp).toLocaleDateString()}{" "}
-                  {weekday[new Date(context?.shipmentDetails?.CurrentStatus.timestamp).getDay()]}
+                  {new Date(
+                    context?.shipmentDetails?.CurrentStatus.timestamp
+                  ).toLocaleDateString(locale)}{" "}
+                  {
+                    weekday[
+                      new Date(
+                        context?.shipmentDetails?.CurrentStatus.timestamp
+                      ).getDay()
+                    ]
+                  }
                 </h4>
               </div>
 
               <div className="each-shipment-data">
-                <h5>Seller Name</h5>
+                <h5>{t("seller-name")}</h5>
                 <h4>{context?.shipmentDetails?.provider}</h4>
               </div>
 
               <div className="each-shipment-data">
-                <h5>Promised Date</h5>
+                <h5>{t("promised-date")}</h5>
                 <h4>
-                  {new Date(context?.shipmentDetails?.PromisedDate).toLocaleDateString()}{" "}
-                  {weekday[new Date(context?.shipmentDetails?.PromisedDate).getDay()]}
+                  {new Date(
+                    context?.shipmentDetails?.PromisedDate
+                  ).toLocaleDateString(locale)}{" "}
+                  {
+                    weekday[
+                      new Date(context?.shipmentDetails?.PromisedDate).getDay()
+                    ]
+                  }
                 </h4>
               </div>
             </div>
 
             <div className="tracking-trip-container">
-              <CustomizedSteppers steps={STEPS} activeStep={currentStep} currentStatus={context?.shipmentDetails?.CurrentStatus} />
+              <CustomizedSteppers
+                steps={STEPS}
+                activeStep={currentStep}
+                currentStatus={context?.shipmentDetails?.CurrentStatus}
+              />
             </div>
           </div>
           <div className="table-and-address-container">
-            <EventsTable transitEvents={context?.shipmentDetails?.TransitEvents} />
+            <EventsTable
+              transitEvents={context?.shipmentDetails?.TransitEvents}
+            />
             <div className="address-and-report-container">
               <AddressCard />
               <ReportProblem />

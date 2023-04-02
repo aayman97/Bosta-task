@@ -14,5 +14,8 @@
   "order-has-been-created": "تم انشاء الشحنة",
   "wrong-shipment-number": "رقم الشحنة خطأ",
   "please-enter-correct-one": "نرجو إدخال رقم صحيح",
-  "enter-shipment-number": "ادخِل رقم الشحنة"
+  "enter-shipment-number": "ادخِل رقم الشحنة",
+  "last-updated": "آخر تحديث",
+  "seller-name": "اسم التاجر",
+  "promised-date": "يوم التوصيل"
 }

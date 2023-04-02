@@ -21,13 +21,13 @@ body {
   min-height: 100%;
 }
 
-h1,
 h2 {
   margin-block-end: 16px;
   font-family: "Cairo-Bold";
 }
 
 h1 {
+  font-family: "Cairo-Bold";
   text-align: center;
 }
 

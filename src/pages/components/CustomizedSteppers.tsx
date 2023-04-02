@@ -11,7 +11,14 @@ import { StepIconProps } from "@mui/material/StepIcon";
 // @ts-expect-error
 import images from "../../assets/images.js";
 import "../../assets/images/checkmark-outline.svg";
-import { ShipmentState, ShipmentTracking, TransitEventState } from "@/types.js";
+import {
+  EventState,
+  EventStateArabic,
+  ShipmentState,
+  ShipmentTracking,
+  TransitEventState,
+} from "@/types.js";
+import { useTranslation } from "react-i18next";
 
 const ColorlibConnector = styled(StepConnector)(
   // @ts-ignore
@@ -144,6 +151,7 @@ export default function CustomizedSteppers({
   const [isVertical, setIsVertical] = React.useState(false);
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
 
+  const { i18n } = useTranslation();
   React.useEffect(() => {
     if (currentStatus) {
       console.log("currentStatus : ", currentStatus);
@@ -197,7 +205,9 @@ export default function CustomizedSteppers({
                 {
                   // @ts-ignore
 
-                  ShipmentState[label.name]
+                  i18n.language === "en"
+                    ? EventState[label.name]
+                    : EventStateArabic[label.name]
                 }
               </h4>
             </StepLabel>

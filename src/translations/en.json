@@ -14,5 +14,8 @@
   "order-has-been-created": "Order has been created",
   "wrong-shipment-number": "Wrong Shipment Number",
   "please-enter-correct-one": "Please Enter Correct One",
-  "enter-shipment-number": "Enter Shipment Number"
+  "enter-shipment-number": "Enter Shipment Number",
+  "last-updated": "Last Updated",
+  "seller-name": "Seller Name",
+  "promised-date": "Promised Date"
 }
