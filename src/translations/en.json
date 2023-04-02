@@ -10,5 +10,6 @@
   "delivery-address": "Delivery Address",
   "dummy-address": "3rd Settlement, New Cairo, Egypt",
   "report-problem-question": "Do you have a problem in your shipment?!",
-  "report-problem-button": "Report a problem"
+  "report-problem-button": "Report a problem",
+  "order-has-been-created": "Order has been created"
 }

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./style/navbar.css";
 import images from "../assets/images";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ShipmentTrackingContext } from "../App";
 import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
   const context = useContext(ShipmentTrackingContext);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const id = useRef(null);
 
@@ -19,8 +20,7 @@ const NavBar = () => {
 
   function searchShipment(e) {
     e.preventDefault();
-    context.setShipmentId(id.current);
-    setOpenShippment(false);
+    window.location.replace(`/${i18n.language}?id=${id.current}`);
   }
 
   return (

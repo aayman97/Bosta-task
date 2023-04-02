@@ -3,12 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./i18n";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
+    <Routes>
+      <Route path="/:lang" element={<App />} />
+      <Route path="*" element={<Navigate to="/en" replace />} />
+    </Routes>
   </BrowserRouter>
 );
 

@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+*[dir="ltr"] {
+  text-align: left;
+}
+
+*[dir="rtl"] {
+  text-align: right;
+}
+
 :root,
 body {
   height: 100%;

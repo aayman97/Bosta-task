@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 export interface TransitEvent {
   state: TransitEventState;
   timestamp: string;
@@ -28,6 +30,17 @@ export enum EventState {
   CANCELLED = "Cancelled",
 }
 
+export enum EventStateArabic {
+  TICKET_CREATED = "تم انشاء الشحنة",
+  PACKAGE_RECEIVED = "تم استلام البضاعة",
+  IN_TRANSIT = "في مرحلة انتقالية",
+  NOT_YET_SHIPPED = "لم يتم التوصيل بعد",
+  OUT_FOR_DELIVERY = "في الطريق إليك",
+  WAITING_FOR_CUSTOMER_ACTION = "في انتظار رد العميل",
+  DELIVERED = "تم التوصيل",
+  CANCELLED = "تم الإلغاء",
+}
+
 export interface ShipmentTracking {
   provider: "Bosta";
   CurrentStatus: {
@@ -43,14 +56,7 @@ export interface ShipmentTracking {
   isEditableShipment: boolean;
   nextWorkingDay: {
     dayDate: string;
-    dayName:
-      | "Saturday"
-      | "Sunday"
-      | "Monday"
-      | "Tuesday"
-      | "Wednesday"
-      | "Thrusday"
-      | "Friday";
+    dayName: "Saturday" | "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thrusday" | "Friday";
   }[];
   error: false;
 }
