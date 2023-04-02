@@ -32,13 +32,15 @@ const NavBar = () => {
   const openSideBarMenu = () => {
     let fixed = document.getElementsByClassName("page-container")[0];
     if (openSideBar === false) {
-      document.getElementsByClassName("navBarContainer")[0].style.height = "100vh";
+      document.getElementsByClassName("navBarContainer")[0].style.height =
+        "100vh";
       setOpenSideBar(true);
 
       fixed.style.overflow = "hidden";
       fixed.style.height = "90vh";
     } else {
-      document.getElementsByClassName("navBarContainer")[0].style.height = "9vh";
+      document.getElementsByClassName("navBarContainer")[0].style.height =
+        "9vh";
       setOpenSideBar(false);
       fixed.style.overflow = "visible";
     }
@@ -46,7 +48,11 @@ const NavBar = () => {
 
   return (
     <div className="navBarContainer">
-      <img onClick={openSideBarMenu} className="menu-icon" src={openSideBar ? images.closeIcon : images.menuIcon} />
+      <img
+        onClick={openSideBarMenu}
+        className="menu-icon"
+        src={openSideBar ? images.closeIcon : images.menuIcon}
+      />
       <a className="logo">
         <img src={images.logo} />
       </a>
@@ -68,7 +74,9 @@ const NavBar = () => {
       <div className="routesContainer">
         <div className="track-shippment-container">
           <a
-            className={`routeButton track-shippment ${openShippment && "opened"}`}
+            className={`routeButton track-shippment ${
+              openShippment && "opened"
+            }`}
             onClick={() => {
               setOpenShippment(!openShippment);
             }}
@@ -79,10 +87,19 @@ const NavBar = () => {
             <div className="search-shippment-container">
               <div className="input-container">
                 <h4>{t("track-your-shipment")}</h4>
-                <form onSubmit={(e) => searchShipment(e)} className="input-search">
-                  <input onChange={(e) => (id.current = +e.target.value)} placeholder={t("shipment-number")} />
+                <form
+                  onSubmit={(e) => searchShipment(e)}
+                  className="input-search"
+                >
+                  <input
+                    onChange={(e) => (id.current = +e.target.value)}
+                    placeholder={t("shipment-number")}
+                  />
                   <button style={{ border: "none" }}>
-                    <img src={images.searchIcon} />
+                    <img
+                      dir={document.documentElement.dir}
+                      src={images.searchIcon}
+                    />
                   </button>
                 </form>
               </div>

@@ -31,9 +31,11 @@ const ColorlibConnector = styled(StepConnector)(
     [`& .${stepConnectorClasses.line}`]: {
       height: 3,
       border: 0,
+      display: vertical && document.documentElement.dir === "rtl" && "none",
       width: vertical && 3,
       position: "relative",
       left: vertical && "5%",
+      right: document.documentElement.dir === "rtl" && "-116%",
       top: vertical && -2,
       backgroundColor:
         theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
@@ -139,6 +141,7 @@ export default function CustomizedSteppers({
 }: StepperProps) {
   const [statusColor, setStatusColor] = React.useState("white");
   const [isVertical, setIsVertical] = React.useState(false);
+  const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
 
   React.useEffect(() => {
     if (currentStatus) {
@@ -157,6 +160,7 @@ export default function CustomizedSteppers({
 
   React.useEffect(() => {
     window.addEventListener("resize", (e) => {
+      setScreenWidth(window.innerWidth);
       if (window.innerWidth < 800) {
         setIsVertical(true);
       } else {
@@ -165,8 +169,12 @@ export default function CustomizedSteppers({
     });
   }, []);
 
+  //   React.useEffect(()=>{
+  // i1
+  //   },[])
+
   return (
-    <Stack sx={{ width: "100%" }} spacing={4}>
+    <Stack sx={{ width: "100%" }} spacing={4} right={""}>
       <Stepper
         alternativeLabel={!isVertical}
         activeStep={activeStep}
