@@ -35,6 +35,8 @@ const TrackingPage = () => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (context?.shipmentDetails) {
       let step = 0;
@@ -119,12 +121,12 @@ const TrackingPage = () => {
         </>
       ) : context?.error ? (
         <h1>
-          Wrong shipment number
+          {t("wrong-shipment-number")}
           <br />
-          Please enter correct one.
+          {t("please-enter-correct-one")}
         </h1>
       ) : (
-        <h1>Enter Shipment number</h1>
+        <h1>{t("enter-shipment-number")}</h1>
       )}
     </MainLayout>
   );

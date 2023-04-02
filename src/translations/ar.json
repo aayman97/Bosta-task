@@ -11,5 +11,8 @@
   "dummy-address": "التجمع الثالث، القاهرة الجديدة، مصر",
   "report-problem-question": "هل لديك مشكلة في شحنتك ؟!",
   "report-problem-button": "الإبلاغ عن مشكلة",
-  "order-has-been-created": "تم انشاء الشحنة"
+  "order-has-been-created": "تم انشاء الشحنة",
+  "wrong-shipment-number": "رقم الشحنة خطأ",
+  "please-enter-correct-one": "نرجو إدخال رقم صحيح",
+  "enter-shipment-number": "ادخِل رقم الشحنة"
 }
