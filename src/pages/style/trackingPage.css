@@ -118,3 +118,72 @@
   font-family: "Cairo-Bold";
   display: block;
 }
+
+@media (max-width: 1000px) {
+  .shipment-data {
+    height: 100%;
+    flex-direction: column;
+    width: 50%;
+    padding: 40px;
+  }
+
+  .each-shipment-data {
+    align-items: center;
+  }
+
+  .tracking-trip-container {
+    border-top: none;
+    border-left: 2px solid rgba(137, 133, 133, 0.19);
+    height: 100%;
+    padding: 16px 40px;
+  }
+
+  .table-and-address-container {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+  .shippment-details-container {
+    display: flex;
+    height: 350px;
+  }
+  .each-shipment-data h5 {
+    font-size: 15px;
+  }
+  .each-shipment-data h4 {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 800px) {
+  .shippment-details-container {
+    display: flex;
+    height: 400px;
+  }
+
+  .each-shipment-data h5 {
+    font-size: 12px;
+    text-align: center;
+  }
+  .each-shipment-data h4 {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 619px) {
+  .shippment-details-container {
+    display: flex;
+    height: 400px;
+  }
+
+  .each-shipment-data h5 {
+    font-size: 10px;
+    text-align: center;
+  }
+  .each-shipment-data h4 {
+    font-size: 10px;
+    text-align: center;
+  }
+}
