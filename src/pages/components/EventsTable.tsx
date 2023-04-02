@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { ShipmentTracking } from "@/types";
 import { TransitEventState } from "@/types";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function createData(branch: string, date: string, time: string, state: TransitEventState) {
   return { branch, date, time, state };
@@ -28,13 +29,16 @@ type EventsRow = {
 export default function BasicTable({ transitEvents }: EventsTableProps) {
   const [tableRows, setTableRows] = useState<EventsRow[]>([]);
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     if (transitEvents) {
       const rows: EventsRow[] = [];
-      for (let i = 0; i < transitEvents.length; i++) {
-        const eventDate = new Date(transitEvents[i].timestamp);
+      const locale = i18n.language === "en" ? "en-US" : "ar-EG";
+      for (const element of transitEvents) {
+        const eventDate = new Date(element.timestamp);
         rows.push(
-          createData(transitEvents[i].hub ?? "Madinet Nasr", eventDate.toLocaleDateString(), eventDate.toLocaleTimeString(), transitEvents[i].state)
+          createData(element.hub ?? "Madinet Nasr", eventDate.toLocaleDateString(locale), eventDate.toLocaleTimeString(locale), element.state)
         );
       }
       setTableRows(rows);
@@ -43,7 +47,7 @@ export default function BasicTable({ transitEvents }: EventsTableProps) {
 
   return (
     <div className="table-container">
-      <h2>Shipment Details</h2>
+      <h2>{t("shipment-details")}</h2>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

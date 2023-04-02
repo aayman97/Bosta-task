@@ -8,6 +8,8 @@ import { TransitEventState } from "@/types";
 import EventsTable from "./components/EventsTable";
 import AddressCard from "./components/AddressCard";
 import ReportProblem from "./components/ReportProblem";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const STEPS: {
   name: TransitEventState.TICKET_CREATED | TransitEventState.PACKAGE_RECEIVED | TransitEventState.OUT_FOR_DELIVERY | TransitEventState.DELIVERED;
@@ -31,11 +33,27 @@ const TrackingPage = () => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
+  const { i18n } = useTranslation();
+
+  const routeParams = useParams<{
+    lang: "ar" | "en";
+  }>();
+
+  useEffect(() => {
+    console.log(routeParams);
+    if (routeParams.lang && !["en", "ar"].includes(routeParams.lang)) {
+      window.location.replace("/en");
+    } else {
+      i18n.changeLanguage(routeParams.lang);
+      document.documentElement.lang = i18n.language;
+      document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    }
+  }, []);
   useEffect(() => {
     if (context?.shipmentDetails) {
       let step = 0;
-      for (let i = 0; i < context.shipmentDetails.TransitEvents.length; i++) {
-        const currEvent = context.shipmentDetails.TransitEvents[i];
+      for (const element of context.shipmentDetails.TransitEvents) {
+        const currEvent = element;
         const currState = currEvent.state;
 
         switch (currState) {

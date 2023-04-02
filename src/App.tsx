@@ -1,11 +1,11 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams, Navigate } from "react-router-dom";
 import "./style/main.css";
 import { Suspense, createContext, lazy, useEffect, useState } from "react";
 import { ShipmentTracking } from "@/types";
 import axios from "axios";
 import React from "react";
-import ErrorBoundary from "@/ErrorBoundary";
+import { useTranslation } from "react-i18next";
 
 type ContextType = {
   shipmentDetails: ShipmentTracking | null;
@@ -33,6 +33,8 @@ function App() {
     }
   }
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     fetchShipmentTrackingInfo();
   }, [shipmentId]);
@@ -40,7 +42,8 @@ function App() {
   return (
     <ShipmentTrackingContext.Provider value={{ shipmentDetails, setShipmentDetails, setShipmentId }}>
       <Routes>
-        <Route path="/" element={<TrackingPage />} />
+        <Route path="/:lang" element={<TrackingPage />} />
+        <Route path="*" element={<Navigate to="/en" replace />} />
       </Routes>
     </ShipmentTrackingContext.Provider>
   );

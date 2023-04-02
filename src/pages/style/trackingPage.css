@@ -44,6 +44,12 @@
   width: 100%;
 }
 
+@media (max-width: 600px) {
+  .table-and-address-container {
+    flex-direction: column;
+  }
+}
+
 .table-container {
   flex-grow: 1;
 }
