@@ -10,14 +10,41 @@ const NavBar = () => {
   const id = useRef(null);
 
   const [openShippment, setOpenShippment] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState(false);
   function searchShipment(e) {
     e.preventDefault();
     context.setShipmentId(id.current);
     setOpenShippment(false);
+
+    if (screen.width <= 1000) {
+      openSideBarMenu();
+    }
   }
+
+  const openSideBarMenu = () => {
+    let fixed = document.getElementsByClassName("page-container")[0];
+    if (openSideBar === false) {
+      document.getElementsByClassName("navBarContainer")[0].style.height =
+        "100vh";
+      setOpenSideBar(true);
+
+      fixed.style.overflow = "hidden";
+      fixed.style.height = "90vh";
+    } else {
+      document.getElementsByClassName("navBarContainer")[0].style.height =
+        "9vh";
+      setOpenSideBar(false);
+      fixed.style.overflow = "visible";
+    }
+  };
 
   return (
     <div className="navBarContainer">
+      <img
+        onClick={openSideBarMenu}
+        className="menu-icon"
+        src={openSideBar ? images.closeIcon : images.menuIcon}
+      />
       <a className="logo">
         <img src={images.logo} />
       </a>

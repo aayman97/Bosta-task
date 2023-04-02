@@ -13,28 +13,34 @@ import images from "../../assets/images.js";
 import "../../assets/images/checkmark-outline.svg";
 import { ShipmentState, ShipmentTracking, TransitEventState } from "@/types.js";
 
-const ColorlibConnector = styled(StepConnector)(({ theme, color }) => ({
-  [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 22,
-  },
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      background: color,
+const ColorlibConnector = styled(StepConnector)(
+  ({ theme, color, vertical }) => ({
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+      top: 22,
     },
-  },
-  [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      background: color,
+    [`&.${stepConnectorClasses.active}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        background: color,
+      },
     },
-  },
-  [`& .${stepConnectorClasses.line}`]: {
-    height: 3,
-    border: 0,
-    backgroundColor:
-      theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
-    borderRadius: 1,
-  },
-}));
+    [`&.${stepConnectorClasses.completed}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        background: color,
+      },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+      height: 3,
+      border: 0,
+      width: vertical && 3,
+      position: "relative",
+      left: vertical && "5%",
+      top: vertical && -5,
+      backgroundColor:
+        theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+      borderRadius: 1,
+    },
+  })
+);
 
 const ColorlibStepIconRoot = styled("div")<{
   ownerState: { completed?: boolean; active?: boolean; color?: string };
@@ -132,6 +138,7 @@ export default function CustomizedSteppers({
   currentStatus,
 }: StepperProps) {
   const [statusColor, setStatusColor] = React.useState("white");
+  const [isVertical, setIsVertical] = React.useState(false);
 
   React.useEffect(() => {
     if (currentStatus) {
@@ -148,12 +155,25 @@ export default function CustomizedSteppers({
     }
   }, [currentStatus]);
 
+  React.useEffect(() => {
+    window.addEventListener("resize", (e) => {
+      if (window.innerWidth < 800) {
+        setIsVertical(true);
+      } else {
+        setIsVertical(false);
+      }
+    });
+  }, []);
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
-        alternativeLabel
+        alternativeLabel={!isVertical}
         activeStep={activeStep}
-        connector={<ColorlibConnector color={statusColor} />}
+        orientation={isVertical ? "vertical" : "horizontal"}
+        connector={
+          <ColorlibConnector color={statusColor} vertical={isVertical} />
+        }
       >
         {steps.map((label) => (
           <Step key={label.name}>
@@ -162,7 +182,9 @@ export default function CustomizedSteppers({
                 <ColorlibStepIcon {...props} color={statusColor} />
               )}
             >
-              {ShipmentState[label.name]}
+              <h4 style={{ fontFamily: "Cairo-Bold" }}>
+                {ShipmentState[label.name]}
+              </h4>
             </StepLabel>
           </Step>
         ))}

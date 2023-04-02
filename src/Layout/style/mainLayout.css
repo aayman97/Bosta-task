@@ -11,3 +11,10 @@
   gap: 32px;
   align-items: center;
 }
+
+@media (max-width: 1000px) {
+  .page-container {
+    position: relative;
+    top: 10vh;
+  }
+}
