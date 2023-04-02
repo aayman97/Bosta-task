@@ -8,23 +8,13 @@ import { EventState, TransitEventState } from "@/types";
 import EventsTable from "./components/EventsTable";
 import AddressCard from "./components/AddressCard";
 import ReportProblem from "./components/ReportProblem";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const weekday = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const STEPS: {
-  name:
-    | TransitEventState.TICKET_CREATED
-    | TransitEventState.PACKAGE_RECEIVED
-    | TransitEventState.OUT_FOR_DELIVERY
-    | TransitEventState.DELIVERED;
+  name: TransitEventState.TICKET_CREATED | TransitEventState.PACKAGE_RECEIVED | TransitEventState.OUT_FOR_DELIVERY | TransitEventState.DELIVERED;
 }[] = [
   {
     name: TransitEventState.TICKET_CREATED,
@@ -48,8 +38,8 @@ const TrackingPage = () => {
   useEffect(() => {
     if (context?.shipmentDetails) {
       let step = 0;
-      for (let i = 0; i < context.shipmentDetails.TransitEvents.length; i++) {
-        const currEvent = context.shipmentDetails.TransitEvents[i];
+      for (const element of context.shipmentDetails.TransitEvents) {
+        const currEvent = element;
         const currState = currEvent.state;
 
         switch (currState) {
@@ -78,17 +68,13 @@ const TrackingPage = () => {
           <div className="shippment-details-container">
             <div className="shipment-data">
               <div className="each-shipment-data">
-                <h5>
-                  Shipment number {context?.shipmentDetails?.TrackingNumber}
-                </h5>
+                <h5>Shipment number {context?.shipmentDetails?.TrackingNumber}</h5>
                 <h4
                   style={{
                     color:
-                      context?.shipmentDetails?.CurrentStatus.state ===
-                      TransitEventState.DELIVERED
+                      context?.shipmentDetails?.CurrentStatus.state === TransitEventState.DELIVERED
                         ? "green"
-                        : context?.shipmentDetails?.CurrentStatus.state ===
-                          TransitEventState.NOT_YET_SHIPPED
+                        : context?.shipmentDetails?.CurrentStatus.state === TransitEventState.NOT_YET_SHIPPED
                         ? "#ffb12b"
                         : "#f4050d",
                   }}
@@ -100,16 +86,8 @@ const TrackingPage = () => {
               <div className="each-shipment-data">
                 <h5>Last updated</h5>
                 <h4>
-                  {new Date(
-                    context?.shipmentDetails?.CurrentStatus.timestamp
-                  ).toLocaleDateString()}{" "}
-                  {
-                    weekday[
-                      new Date(
-                        context?.shipmentDetails?.CurrentStatus.timestamp
-                      ).getDay()
-                    ]
-                  }
+                  {new Date(context?.shipmentDetails?.CurrentStatus.timestamp).toLocaleDateString()}{" "}
+                  {weekday[new Date(context?.shipmentDetails?.CurrentStatus.timestamp).getDay()]}
                 </h4>
               </div>
 
@@ -121,30 +99,18 @@ const TrackingPage = () => {
               <div className="each-shipment-data">
                 <h5>Promised Date</h5>
                 <h4>
-                  {new Date(
-                    context?.shipmentDetails?.PromisedDate
-                  ).toLocaleDateString()}{" "}
-                  {
-                    weekday[
-                      new Date(context?.shipmentDetails?.PromisedDate).getDay()
-                    ]
-                  }
+                  {new Date(context?.shipmentDetails?.PromisedDate).toLocaleDateString()}{" "}
+                  {weekday[new Date(context?.shipmentDetails?.PromisedDate).getDay()]}
                 </h4>
               </div>
             </div>
 
             <div className="tracking-trip-container">
-              <CustomizedSteppers
-                steps={STEPS}
-                activeStep={currentStep}
-                currentStatus={context?.shipmentDetails?.CurrentStatus}
-              />
+              <CustomizedSteppers steps={STEPS} activeStep={currentStep} currentStatus={context?.shipmentDetails?.CurrentStatus} />
             </div>
           </div>
           <div className="table-and-address-container">
-            <EventsTable
-              transitEvents={context?.shipmentDetails?.TransitEvents}
-            />
+            <EventsTable transitEvents={context?.shipmentDetails?.TransitEvents} />
             <div className="address-and-report-container">
               <AddressCard />
               <ReportProblem />

@@ -1,0 +1,15 @@
+{
+  "home": "الصفحة الرئيسية",
+  "prices": "الأسعار",
+  "call-sales": "اتصل بمندوب المبيعات",
+  "track-shipment": "ترقّب الشحنة",
+  "track-your-shipment": "ترقّب شحنتك",
+  "shipment-number": "شحنة رقم",
+  "login": "تسجيل الدخول",
+  "shipment-details": "تفاصيل الشحنة",
+  "delivery-address": "عنوان التوصيل",
+  "dummy-address": "التجمع الثالث، القاهرة الجديدة، مصر",
+  "report-problem-question": "هل لديك مشكلة في شحنتك ؟!",
+  "report-problem-button": "الإبلاغ عن مشكلة",
+  "order-has-been-created": "تم انشاء الشحنة"
+}

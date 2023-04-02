@@ -1,0 +1,15 @@
+{
+  "home": "Home",
+  "prices": "Prices",
+  "call-sales": "Call Sales",
+  "track-shipment": "Track Shipment",
+  "track-your-shipment": "Track Your Shipment",
+  "shipment-number": "Shipment number",
+  "login": "Login",
+  "shipment-details": "Shipment Details",
+  "delivery-address": "Delivery Address",
+  "dummy-address": "3rd Settlement, New Cairo, Egypt",
+  "report-problem-question": "Do you have a problem in your shipment?!",
+  "report-problem-button": "Report a problem",
+  "order-has-been-created": "Order has been created"
+}
