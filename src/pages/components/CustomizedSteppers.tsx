@@ -4,10 +4,6 @@ import Stack from "@mui/material/Stack";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Check from "@mui/icons-material/Check";
-import SettingsIcon from "@mui/icons-material/Settings";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
@@ -15,7 +11,7 @@ import { StepIconProps } from "@mui/material/StepIcon";
 // @ts-expect-error
 import images from "../../assets/images.js";
 import "../../assets/images/checkmark-outline.svg";
-import { ShipmentTracking, TransitEventState } from "@/types.js";
+import { ShipmentState, ShipmentTracking, TransitEventState } from "@/types.js";
 
 const ColorlibConnector = styled(StepConnector)(({ theme, color }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -69,10 +65,38 @@ function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed, className, color } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />,
-    2: <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />,
-    3: <img src={images.carIcon} style={{ width: "50%" }} alt="check_mark" />,
-    4: <img src={images.cartIcon} style={{ width: "50%" }} alt="check_mark" />,
+    1: (
+      <img
+        className="iconStepper"
+        src={images.checkIcon}
+        style={{ width: "50%" }}
+        alt="check_mark"
+      />
+    ),
+    2: (
+      <img
+        className="iconStepper"
+        src={images.briefCase}
+        style={{ width: "50%" }}
+        alt="check_mark"
+      />
+    ),
+    3: (
+      <img
+        className="iconStepper"
+        src={images.carIcon}
+        style={{ width: "50%" }}
+        alt="check_mark"
+      />
+    ),
+    4: (
+      <img
+        className="iconStepper"
+        src={images.cartIcon}
+        style={{ width: "50%" }}
+        alt="check_mark"
+      />
+    ),
   };
 
   console.log("color : ", color);
@@ -82,7 +106,12 @@ function ColorlibStepIcon(props: StepIconProps) {
       className={className}
     >
       {completed ? (
-        <img src={images.checkIcon} style={{ width: "50%" }} alt="check_mark" />
+        <img
+          className="iconStepper"
+          src={images.checkIcon}
+          style={{ width: "50%" }}
+          alt="check_mark"
+        />
       ) : (
         icons[String(props.icon)]
       )}
@@ -94,31 +123,43 @@ interface StepperProps {
     name: TransitEventState;
   }[];
   activeStep: number;
-  currentStatus: Pick<ShipmentTracking, "CurrentStatus"> | undefined;
+  currentStatus: ShipmentTracking["CurrentStatus"] | undefined;
 }
 
-enum ShipmentState {
-  TICKET_CREATED = "Order has been created",
-  PACKAGE_RECEIVED = "Package received",
-  OUT_FOR_DELIVERY = "Out for delivery",
-  DELIVERED = "Delivered",
-}
 export default function CustomizedSteppers({
   steps,
   activeStep,
+  currentStatus,
 }: StepperProps) {
+  const [statusColor, setStatusColor] = React.useState("white");
+
+  React.useEffect(() => {
+    if (currentStatus) {
+      console.log("currentStatus : ", currentStatus);
+      if (currentStatus.state === TransitEventState.DELIVERED) {
+        setStatusColor("green");
+      } else if (currentStatus.state === TransitEventState.NOT_YET_SHIPPED) {
+        setStatusColor("#ffb12b");
+      } else {
+        setStatusColor("#f4050d");
+      }
+    } else {
+      setStatusColor("white");
+    }
+  }, [currentStatus]);
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
         alternativeLabel
         activeStep={activeStep}
-        connector={<ColorlibConnector color="green" />}
+        connector={<ColorlibConnector color={statusColor} />}
       >
         {steps.map((label) => (
           <Step key={label.name}>
             <StepLabel
               StepIconComponent={(props) => (
-                <ColorlibStepIcon {...props} color={"green"} />
+                <ColorlibStepIcon {...props} color={statusColor} />
               )}
             >
               {ShipmentState[label.name]}

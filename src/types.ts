@@ -17,6 +17,17 @@ export enum TransitEventState {
   CANCELLED = "CANCELLED",
 }
 
+export enum EventState {
+  TICKET_CREATED = "Order has been created",
+  PACKAGE_RECEIVED = "Package Recieved",
+  IN_TRANSIT = "In transit",
+  NOT_YET_SHIPPED = "Not yet shipped",
+  OUT_FOR_DELIVERY = "Out for delivery",
+  WAITING_FOR_CUSTOMER_ACTION = "Waiting for customer action",
+  DELIVERED = "Delivered",
+  CANCELLED = "Cancelled",
+}
+
 export interface ShipmentTracking {
   provider: "Bosta";
   CurrentStatus: {
@@ -32,6 +43,21 @@ export interface ShipmentTracking {
   isEditableShipment: boolean;
   nextWorkingDay: {
     dayDate: string;
-    dayName: "Saturday" | "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thrusday" | "Friday";
+    dayName:
+      | "Saturday"
+      | "Sunday"
+      | "Monday"
+      | "Tuesday"
+      | "Wednesday"
+      | "Thrusday"
+      | "Friday";
   }[];
+  error: false;
+}
+
+export enum ShipmentState {
+  TICKET_CREATED = "Order has been created",
+  PACKAGE_RECEIVED = "Package received",
+  OUT_FOR_DELIVERY = "Out for delivery",
+  DELIVERED = "Delivered",
 }

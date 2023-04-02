@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { ShipmentTracking } from "@/types";
+import { EventState, ShipmentTracking } from "@/types";
 import { TransitEventState } from "@/types";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -66,7 +66,7 @@ export default function BasicTable({ transitEvents }: EventsTableProps) {
                 </TableCell>
                 <TableCell align="right">{row.date}</TableCell>
                 <TableCell align="right">{row.time}</TableCell>
-                <TableCell align="right">{row.state}</TableCell>
+                <TableCell align="right">{EventState[row.state]}</TableCell>
               </TableRow>
             ))}
           </TableBody>
