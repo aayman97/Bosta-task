@@ -27,7 +27,7 @@ function App() {
 
   const [error, setError] = useState<boolean>(false);
   // const [shipmentId, setShipmentId] = useState<number | null>(null);
-  const [shipmentId, setShipmentId] = useState<number | null>(searchParams.get("id") ?? null);
+  const [shipmentId, setShipmentId] = useState<number | null>(parseInt(searchParams.get("id") ?? "") || null);
   async function fetchShipmentTrackingInfo() {
     try {
       const res = await axios.get<ShipmentTracking>(`https://tracking.bosta.co/shipments/track/${shipmentId}`);
