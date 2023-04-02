@@ -34,7 +34,7 @@ const ColorlibConnector = styled(StepConnector)(
       width: vertical && 3,
       position: "relative",
       left: vertical && "5%",
-      top: vertical && -5,
+      top: vertical && -2,
       backgroundColor:
         theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
       borderRadius: 1,
