@@ -14,6 +14,7 @@ import "../../assets/images/checkmark-outline.svg";
 import { ShipmentState, ShipmentTracking, TransitEventState } from "@/types.js";
 
 const ColorlibConnector = styled(StepConnector)(
+  // @ts-ignore
   ({ theme, color, vertical }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
       top: 22,
@@ -180,6 +181,8 @@ export default function CustomizedSteppers({
         activeStep={activeStep}
         orientation={isVertical ? "vertical" : "horizontal"}
         connector={
+          // @ts-ignore
+
           <ColorlibConnector color={statusColor} vertical={isVertical} />
         }
       >
@@ -191,7 +194,11 @@ export default function CustomizedSteppers({
               )}
             >
               <h4 style={{ fontFamily: "Cairo-Bold" }}>
-                {ShipmentState[label.name]}
+                {
+                  // @ts-ignore
+
+                  ShipmentState[label.name]
+                }
               </h4>
             </StepLabel>
           </Step>
