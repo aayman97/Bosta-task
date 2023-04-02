@@ -10,6 +10,12 @@ const NavBar = () => {
   const id = useRef(null);
 
   const [openShippment, setOpenShippment] = useState(false);
+  function searchShipment(e) {
+    e.preventDefault();
+    context.setShipmentId(id.current);
+    setOpenShippment(false);
+  }
+
   return (
     <div className="navBarContainer">
       <a className="logo">
@@ -46,19 +52,18 @@ const NavBar = () => {
             <div className="search-shippment-container">
               <div className="input-container">
                 <h4>Track your shippment</h4>
-                <div className="input-search">
+                <form
+                  onSubmit={(e) => searchShipment(e)}
+                  className="input-search"
+                >
                   <input
                     onChange={(e) => (id.current = +e.target.value)}
                     placeholder="shippment number"
                   />
-                  <img
-                    onClick={() => {
-                      context.setShipmentId(id.current);
-                      setOpenShippment(false);
-                    }}
-                    src={images.searchIcon}
-                  />
-                </div>
+                  <button style={{ border: "none" }}>
+                    <img src={images.searchIcon} />
+                  </button>
+                </form>
               </div>
             </div>
           )}

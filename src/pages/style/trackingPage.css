@@ -110,4 +110,5 @@
   font-weight: 600;
   cursor: pointer;
   font-family: "Cairo-Bold";
+  display: block;
 }

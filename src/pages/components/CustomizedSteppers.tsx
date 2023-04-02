@@ -11,7 +11,7 @@ import { StepIconProps } from "@mui/material/StepIcon";
 // @ts-expect-error
 import images from "../../assets/images.js";
 import "../../assets/images/checkmark-outline.svg";
-import { ShipmentTracking, TransitEventState } from "@/types.js";
+import { ShipmentState, ShipmentTracking, TransitEventState } from "@/types.js";
 
 const ColorlibConnector = styled(StepConnector)(({ theme, color }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -76,7 +76,7 @@ function ColorlibStepIcon(props: StepIconProps) {
     2: (
       <img
         className="iconStepper"
-        src={images.checkIcon}
+        src={images.briefCase}
         style={{ width: "50%" }}
         alt="check_mark"
       />
@@ -126,12 +126,6 @@ interface StepperProps {
   currentStatus: ShipmentTracking["CurrentStatus"] | undefined;
 }
 
-enum ShipmentState {
-  TICKET_CREATED = "Order has been created",
-  PACKAGE_RECEIVED = "Package received",
-  OUT_FOR_DELIVERY = "Out for delivery",
-  DELIVERED = "Delivered",
-}
 export default function CustomizedSteppers({
   steps,
   activeStep,

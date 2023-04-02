@@ -12,6 +12,7 @@ type ContextType = {
     React.SetStateAction<ShipmentTracking | null>
   >;
   setShipmentId: React.Dispatch<React.SetStateAction<number | null>>;
+  error: boolean;
 };
 
 const TrackingPage = lazy(async () => await import("./pages/TrackingPage"));
@@ -23,6 +24,8 @@ const SHIPMENT_ID = 7234258;
 function App() {
   const [shipmentDetails, setShipmentDetails] =
     useState<ShipmentTracking | null>(null);
+
+  const [error, setError] = useState<boolean>(false);
   // const [shipmentId, setShipmentId] = useState<number | null>(null);
   const [shipmentId, setShipmentId] = useState<number | null>(null);
   async function fetchShipmentTrackingInfo() {
@@ -31,9 +34,11 @@ function App() {
         `https://tracking.bosta.co/shipments/track/${shipmentId}`
       );
       setShipmentDetails(res.data);
+      setError(false);
     } catch (err) {
       console.error(err);
       setShipmentDetails(null);
+      setError(true);
     }
   }
 
@@ -45,7 +50,7 @@ function App() {
 
   return (
     <ShipmentTrackingContext.Provider
-      value={{ shipmentDetails, setShipmentDetails, setShipmentId }}
+      value={{ shipmentDetails, setShipmentDetails, setShipmentId, error }}
     >
       <Routes>
         <Route path="/" element={<TrackingPage />} />
